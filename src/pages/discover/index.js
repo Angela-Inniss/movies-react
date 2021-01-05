@@ -68,7 +68,7 @@ export default class Discover extends React.Component {
             searchMovies={(keyword, year) => this.searchMovies(keyword, year)}
           />
         </MovieFilters>
-        <ExpandableFilters movieGenres={genreOptions} />
+        {/*<ExpandableFilters movieGenres={genreOptions} />*/}
         <MovieResults>
           {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
           <MovieList movies={results || []} genres={genreOptions || []} />

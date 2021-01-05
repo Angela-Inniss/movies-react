@@ -11,14 +11,25 @@ export default class SearchFilters extends React.Component {
 
     return (
       <FiltersWrapper>
+
+
         <SearchFiltersCont className="search_inputs_cont" marginBottom>
           {/* Implement a SearchBar component and use it for both the keyword and the year inputs */}
         </SearchFiltersCont>
+
+
+
         <SearchFiltersCont>
-          <CategoryTitle>Movies</CategoryTitle>
+          <CategoryTitle bold >Movie</CategoryTitle>
+            <CategoryTitle> -- Select Genre(s)</CategoryTitle>
           {/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
-          {/*<ExpandableFilters movieGenres={genres} />*/}
+          <ExpandableFilters movieGenres={genres} />
+            <CategoryTitle> + Select min. vote</CategoryTitle>
+            <CategoryTitle> + Select language</CategoryTitle>
         </SearchFiltersCont>
+
+
+
       </FiltersWrapper>
     );
   }
@@ -26,6 +37,7 @@ export default class SearchFilters extends React.Component {
 
 const FiltersWrapper = styled.div`
   position: relative;
+  border:red 1px solid;
 `;
 
 const SearchFiltersCont = styled.div`
@@ -33,6 +45,7 @@ const SearchFiltersCont = styled.div`
   padding: 20px;
   border-radius: 3px;
   transition: all 0.3s ease-in-out;
+  border:green 1px solid;
 
   ${(props) =>
     props.marginBottom &&
@@ -41,4 +54,13 @@ const SearchFiltersCont = styled.div`
     `}
 `;
 
-const CategoryTitle = styled.div``;
+const CategoryTitle = styled.div`
+margin-bottom: 7px;
+
+  ${(props) =>
+    props.bold &&
+    css`
+      font-weight:bold;
+    `}
+
+`;

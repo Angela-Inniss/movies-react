@@ -13,7 +13,7 @@ export default class ExpandableFilters extends React.Component {
   }
   render() {
     return (
-      <SearchFiltersCont marginTop>
+      < GenreFilterCont marginTop>
        <ExpandableFiltersUl>
         {this.props.movieGenres.map((genre) => {
           return (
@@ -24,7 +24,8 @@ export default class ExpandableFilters extends React.Component {
           );
         })}
        </ExpandableFiltersUl>
-      </SearchFiltersCont>
+      </ GenreFilterCont>
+
     );
   }
 
@@ -34,28 +35,25 @@ export default class ExpandableFilters extends React.Component {
 ExpandableFilters.defaultProps = {
   movieGenres: [],
 };
-const SearchFiltersCont = styled.div`
+const GenreFilterCont = styled.div`
   background-color: white;
-  padding: 20px;
+ 
   border-radius: 3px;
   transition: all 0.3s ease-in-out;
   display: flex;
-
-  ${(props) =>
-    props.marginTop &&
-    css`
-      margin-top: 15px;
-    `}
 `;
 
 const ExpandableFiltersUl = styled.ul `
      list-style: none;
     padding-left: 0;
+ 
 `;
 
 const ExpandableFiltersLi = styled.li `
     display:flex;
     margin-bottom: 7px;
+     font-size:13px;
+     color:gray;
 `;
 
 //// this.props.moviegenres this will be passed down as a prop via the searchFilter file "genres" then via the discover file genreOptions
