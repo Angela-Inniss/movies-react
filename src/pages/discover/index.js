@@ -8,6 +8,8 @@ import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
 import ExpandableFilters from "../../components/expandablefilters";
 
+import movieGenres from "./movieGenres";
+
 export default class Discover extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,8 @@ export default class Discover extends React.Component {
       results: [],
       movieDetails: null,
       totalCount: 0,
-      genreOptions: [],
+      // genreOptions: [],
+      genreOptions: movieGenres,
       ratingOptions: [
         { id: 7.5, name: 7.5 },
         { id: 8, name: 8 },
@@ -36,7 +39,7 @@ export default class Discover extends React.Component {
     };
   }
 
-  // Write a function to preload the popular movies when page loads & get the movie genres
+  // Write a function to preload the popular movies when page loads & get the movie genres // me pass the result to genreOptions above
 
   // Write a function to get the movie details based on the movie id taken from the URL.
 
@@ -65,7 +68,7 @@ export default class Discover extends React.Component {
             searchMovies={(keyword, year) => this.searchMovies(keyword, year)}
           />
         </MovieFilters>
-        <ExpandableFilters />
+        <ExpandableFilters movieGenres={genreOptions} />
         <MovieResults>
           {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
           <MovieList movies={results || []} genres={genreOptions || []} />

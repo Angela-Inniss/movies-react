@@ -5,10 +5,15 @@ export default class CheckBox extends React.Component {
   // Create a custom checkbox component
 
   render() {
-    return <CheckboxCont></CheckboxCont>;
+    return (
+      <CheckboxCont>
+        <input type="checkbox" />
+      </CheckboxCont>
+    );
   }
 }
 
 const CheckboxCont = styled.div`
   position: relative;
+  margin-right: 5px;
 `;
