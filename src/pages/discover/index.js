@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import {axios} from "axios";
 
 import * as colors from "../../colors";
 import * as fetcher from "../../fetcher";
@@ -21,7 +22,7 @@ export default class Discover extends React.Component {
       movieDetails: null,
       totalCount: 0,
       // genreOptions: [],
-      genreOptions: movieGenres,
+      genreOptions: movieGenres, // i added this to get data
       ratingOptions: [
         { id: 7.5, name: 7.5 },
         { id: 8, name: 8 },
@@ -45,6 +46,8 @@ export default class Discover extends React.Component {
 
   async searchMovies(keyword, year) {
     // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
+    console.log(keyword,year);
+
   }
 
   render() {
