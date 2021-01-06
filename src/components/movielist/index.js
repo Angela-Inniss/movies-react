@@ -10,6 +10,8 @@ export default class MovieList extends React.Component {
     return (
       <MoviesWrapper>
         {/* Finish the MovieItem component and use it here to display the movie results */}
+        hiya this is where the movie list component and cards will go when data
+        pulled from API
       </MoviesWrapper>
     );
   }
