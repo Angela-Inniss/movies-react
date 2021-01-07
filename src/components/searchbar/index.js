@@ -6,7 +6,7 @@ import SearchIcon from "../../images/search-icon-yellow.png";
 import CalendarIcon from "../../images/year-icon.png";
 
 export default class SearchBar extends React.Component {
-  //i added the constructor and state and onchagnge
+  // me: added the constructor and state and onchange
   constructor(props) {
     super(props);
     this.state = {
@@ -16,30 +16,13 @@ export default class SearchBar extends React.Component {
   }
 
   handleOnChange = (event) => {
-    const { movieTitleSearch } = this.state;
-    const { searchByYear } = this.state;
     this.setState(
       {
-        [event.target.name]: event.target.value, // me: updating state
+       ...this.state, [event.target.name]: event.target.value, // me: updating state
       },
-      () => {
-        if (movieTitleSearch.length || searchByYear.length > 1) {
-          this.props.movieSearch(movieTitleSearch, searchByYear); // me: if someone has searched by year or movie title call th function movieSearch which is a prop! and pass in searches
-        }
-      }
     );
+    this.props.movieSearch(this.state.movieTitleSearch, this.state.searchByYear) // me: if someone has searched by year or movie title call th function movieSearch which is a prop! and pass in searches
   };
-
-  // returns and array of filtered movies... should
-  // this filters the movies in the list and checks if the book in the list matches what the user has typed
-
-  // filteredMoviesUserSearch = () => {
-  //   this.props.movieSearch.filter((movie) => {
-  //     return movie
-  //       .toLowerCase()
-  //       .includes(this.state.userSearchValue.toLowerCase());
-  //   });
-  // };
 
   render() {
     return (
@@ -60,9 +43,8 @@ export default class SearchBar extends React.Component {
           placeholder="search by year"
           value={this.state.searchByYear}
         />
+
       </div>
     );
   }
 }
-
-//me: movieList is a prop (a list of movies) that will be filtered, to see if the ca

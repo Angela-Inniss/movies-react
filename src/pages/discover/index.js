@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {axios} from "axios";
+
 
 import * as colors from "../../colors";
 import * as fetcher from "../../fetcher";
@@ -10,6 +10,8 @@ import MovieList from "../../components/movielist";
 import ExpandableFilters from "../../components/expandablefilters";
 
 import movieGenres from "./movieGenres";
+
+import { getMoviesFiltered } from "../../fetcher";
 
 export default class Discover extends React.Component {
   constructor(props) {
@@ -40,13 +42,16 @@ export default class Discover extends React.Component {
     };
   }
 
-  // Write a function to preload the popular movies when page loads & get the movie genres // me pass the result to genreOptions above
+  // Write a function to preload the popular movies when page loads & get the movie genres // me pass the result to genreOptions above // use useeffect?
 
-  // Write a function to get the movie details based on the movie id taken from the URL.
+
+
+  // Write a function to get the movie details based on the movie id taken from the URL.// me: smethign to do with router probs
 
   async searchMovies(keyword, year) {
     // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
-    console.log(keyword,year);
+    const response = await getMoviesFiltered(keyword, year);
+    console.log(response); // filtered response
 
   }
 
@@ -76,6 +81,7 @@ export default class Discover extends React.Component {
           {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
           <MovieList movies={results || []} genres={genreOptions || []} />
           {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
+
         </MovieResults>
       </DiscoverWrapper>
     );

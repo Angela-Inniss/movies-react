@@ -7,7 +7,7 @@ import SearchBar from "../../components/searchbar";
 
 export default class SearchFilters extends React.Component {
   render() {
-    const { genres, ratings, languages, searchMovies } = this.props;
+    const { genres, ratings, languages, searchMovies } = this.props; // me : this is for the filter under the
     //me : search movies is a function? hmm
     return (
       <FiltersWrapper>
@@ -54,5 +54,3 @@ const CategoryTitle = styled.div`
       font-weight: bold;
     `}
 `;
-
-// me : searchMovies is the list of movies coming form the api i htink..passed down to my searchBar component via prop movieList
