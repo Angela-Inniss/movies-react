@@ -16,12 +16,14 @@ export default class SearchBar extends React.Component {
   }
 
   handleOnChange = (event) => {
-    this.setState(
-      {
-       ...this.state, [event.target.name]: event.target.value, // me: updating state
-      },
-    );
-    this.props.movieSearch(this.state.movieTitleSearch, this.state.searchByYear) // me: if someone has searched by year or movie title call th function movieSearch which is a prop! and pass in searches
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value, // me: updating state
+    });
+    this.props.movieSearch(
+      this.state.movieTitleSearch,
+      this.state.searchByYear
+    ); // me: if someone has searched by year or movie title call th function movieSearch which is a prop! and pass in searches
   };
 
   render() {
@@ -43,7 +45,6 @@ export default class SearchBar extends React.Component {
           placeholder="search by year"
           value={this.state.searchByYear}
         />
-
       </div>
     );
   }
