@@ -7,8 +7,6 @@ export default class MovieList extends React.Component {
     const { movies, genres } = this.props;
 
     return (
-      <>
-        {/* Finish the MovieItem component and use it here to display the movie results */}
         <MoviesWrapper>
           {movies.map((movie) => {
             const {
@@ -31,9 +29,9 @@ export default class MovieList extends React.Component {
           {/*{genres.map((genre)=>{*/}
           {/*    return <div>{genre.id} {genre.name}</div>*/}
           {/*})}*/}
-          {genres}
+          {/*{genres}*/}
         </MoviesWrapper>
-      </>
+
     );
   }
 }
@@ -46,6 +44,8 @@ const MoviesWrapper = styled.div`
   transition: all 0.3s ease-in-out;
   border: green 1px solid;
   margin-top: 10px;
+  margin-bottom:10px
 `;
 
 // each movie in movies will be an object i think when come back from api
+{/* Finish the MovieItem component and use it here to display the movie results */}

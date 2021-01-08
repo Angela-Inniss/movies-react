@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import * as colors from "../../colors";
 import "../../css/movieItem.scss";
 
 export default class MovieItem extends React.Component {
@@ -17,12 +18,14 @@ export default class MovieItem extends React.Component {
           />
         </LeftCont>
         <RightCont>
-          <div>
-            <h2>{title}</h2>
-            <p>{rating}</p>
-            <p>{overview}</p>
-            <p>{release}</p>
-          </div>
+         <div className="movie-title-container">
+            <h2 className="movie-title">{title}</h2>
+            {/*<p className="movie-rating">{rating}</p>*/}
+             <Rating>{rating}</Rating>
+         </div>
+
+          <p>{overview}</p>
+          <p>{release}</p>
         </RightCont>
       </MovieItemWrapper>
     );
@@ -33,15 +36,31 @@ const MovieItemWrapper = styled.div`
   position: relative;
   background-color: white;
   border-radius: 3px;
-  display: flex;
+  display: flex; // added flex on each movie
+  padding:20px
+  border: 1px solid grey;
+  margin:10px;
 `;
 
 const LeftCont = styled.div`
   display: inline-block;
+  // width:100%
+  margin-right:20px;
 `;
 
 const RightCont = styled.div`
   display: inline-block;
+  flex: 1; // to make the right side of the content take up the most room when there is space left
 `;
+const Rating = styled.p`
+  background-color: ${colors.primaryColor};
+  color: ${colors.lightBackground};
+  margin:0;
+  border-radius: 9px;
+  text-align: center;
+  width: 25px;
+  font-weight:bold;
+  padding:5px;
+`
 
-// me: how am i using props with no props at top?!!
+// me: how am i using props with no props at top... Props come from react import.
