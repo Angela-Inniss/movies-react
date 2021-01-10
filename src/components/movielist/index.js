@@ -5,33 +5,38 @@ import MovieItem from "../movieitem";
 export default class MovieList extends React.Component {
   render() {
     const { movies, genres } = this.props;
+    const matchGenres = (movieGenreIds) => {
+      return genres
+        .filter((genre) => {
+          return movieGenreIds.includes(genre.id);
+        })
+        .map((genre) => genre.name);
+    };
 
     return (
-        <MoviesWrapper>
-          {movies.map((movie) => {
-            const {
-              title,
-              vote_average,
-              overview,
-              release_date,
-              poster_path,
-            } = movie;
-            return (
-              <MovieItem
-                title={title}
-                rating={vote_average}
-                overview={overview}
-                release={release_date}
-                poster={poster_path}
-              />
-            );
-          })}
-          {/*{genres.map((genre)=>{*/}
-          {/*    return <div>{genre.id} {genre.name}</div>*/}
-          {/*})}*/}
-          {/*{genres}*/}
-        </MoviesWrapper>
-
+      <MoviesWrapper>
+        {movies.map((movie, index) => {
+          const {
+            title,
+            vote_average,
+            overview,
+            release_date,
+            poster_path,
+            genre_ids,
+          } = movie;
+          return (
+            <MovieItem
+              key={index}
+              title={title}
+              rating={vote_average}
+              overview={overview}
+              release={release_date}
+              poster={poster_path}
+              movieGenres={matchGenres(genre_ids)}
+            />
+          );
+        })}
+      </MoviesWrapper>
     );
   }
 }
@@ -44,8 +49,10 @@ const MoviesWrapper = styled.div`
   transition: all 0.3s ease-in-out;
   border: green 1px solid;
   margin-top: 10px;
-  margin-bottom:10px
+  margin-bottom: 10px;
 `;
 
 // each movie in movies will be an object i think when come back from api
-{/* Finish the MovieItem component and use it here to display the movie results */}
+{
+  /* Finish the MovieItem component and use it here to display the movie results */
+}

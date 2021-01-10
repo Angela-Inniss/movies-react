@@ -6,10 +6,16 @@ import "../../css/movieItem.scss";
 
 export default class MovieItem extends React.Component {
   render() {
-    const { title, overview, rating, release, poster } = this.props;
+    const {
+      title,
+      overview,
+      rating,
+      release,
+      poster,
+      movieGenres,
+    } = this.props;
     return (
       // The MovieItemWrapper must be linked to the movie details popup
-
       <MovieItemWrapper>
         <LeftCont>
           <img
@@ -18,12 +24,11 @@ export default class MovieItem extends React.Component {
           />
         </LeftCont>
         <RightCont>
-         <div className="movie-title-container">
+          <div className="movie-title-container">
             <h2 className="movie-title">{title}</h2>
-            {/*<p className="movie-rating">{rating}</p>*/}
-             <Rating>{rating}</Rating>
-         </div>
-
+            <Rating>{rating}</Rating>
+          </div>
+          <div>{movieGenres.join(" ")}</div>
           <p>{overview}</p>
           <p>{release}</p>
         </RightCont>
@@ -45,7 +50,7 @@ const MovieItemWrapper = styled.div`
 const LeftCont = styled.div`
   display: inline-block;
   // width:100%
-  margin-right:20px;
+  margin-right: 20px;
 `;
 
 const RightCont = styled.div`
@@ -55,12 +60,12 @@ const RightCont = styled.div`
 const Rating = styled.p`
   background-color: ${colors.primaryColor};
   color: ${colors.lightBackground};
-  margin:0;
+  margin: 0;
   border-radius: 9px;
   text-align: center;
   width: 25px;
-  font-weight:bold;
-  padding:5px;
-`
+  font-weight: bold;
+  padding: 5px;
+`;
 
 // me: how am i using props with no props at top... Props come from react import.

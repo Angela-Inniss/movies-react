@@ -33,11 +33,11 @@ export default class ExpandableFilters extends React.Component {
         <GenreFilterCont marginTop>
           {filtersShown && (
             <ExpandableFiltersUl>
-              {this.props.movieGenres.map((genre) => {
+              {this.props.movieGenres.map((genre, index) => {
                 return (
-                  <ExpandableFiltersLi>
+                  <ExpandableFiltersLi key={index}>
                     <Checkbox />
-                    {genre}
+                    {genre.name}
                   </ExpandableFiltersLi>
                 );
               })}
