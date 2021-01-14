@@ -22,8 +22,7 @@ export const loadPopularMoviesAndGenres = async () => {
     const response = await axios.get(
       "https://api.themoviedb.org/3/movie/popular?api_key=3c92d1fbb8f0a1c50d4a45730be93fda&language=en-US&page=1"
     );
-    const { results } = response.data;
-    return results;
+   return response.data;
   } catch (error) {
     console.error(error);
   }

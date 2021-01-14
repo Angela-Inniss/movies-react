@@ -15,7 +15,7 @@ export default class MovieList extends React.Component {
 
     return (
       <MoviesWrapper>
-        {movies.map((movie, index) => {
+        {movies.results && movies.results.map((movie, index) => {
           const {
             title,
             vote_average,

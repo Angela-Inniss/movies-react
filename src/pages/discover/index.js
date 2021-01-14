@@ -59,7 +59,8 @@ export default class Discover extends React.Component {
   // on page load this kicks off load movies api and genres api req
   componentDidMount() {
     this.loadMovies().then((response) => {
-      this.setState({ results: response });
+      this.setState({ results: response,
+        totalCount: response });
     });
     this.getGenreList().then((response) => {
       this.setState({ genreOptions: response });
@@ -71,8 +72,7 @@ export default class Discover extends React.Component {
   // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
   async searchMovies(keyword, year) {
     const response = await getMoviesFiltered(keyword, year);
-    console.log(response); // filtered response
-    // this.setState({ results: response.map((movie) => movie.title) });
+    this.setState({ results: response});
   }
 
   render() {
