@@ -24,6 +24,7 @@ export default class Discover extends React.Component {
       results: [],
       movieDetails: null,
       totalCount: 0,
+      showMovieDetailsModal: false,
       genreOptions: [],
       ratingOptions: [
         { id: 7.5, name: 7.5 },
@@ -59,8 +60,7 @@ export default class Discover extends React.Component {
   // on page load this kicks off load movies api and genres api req
   componentDidMount() {
     this.loadMovies().then((response) => {
-      this.setState({ results: response,
-        totalCount: response });
+      this.setState({ results: response, totalCount: response });
     });
     this.getGenreList().then((response) => {
       this.setState({ genreOptions: response });
@@ -72,8 +72,15 @@ export default class Discover extends React.Component {
   // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
   async searchMovies(keyword, year) {
     const response = await getMoviesFiltered(keyword, year);
-    this.setState({ results: response});
+    this.setState({ results: response });
   }
+
+
+  showModal = () => {
+    console.log("show me");
+    this.setState({ showMovieDetailsModal: !this.state.showMovieDetailsModal});
+
+  };
 
   render() {
     const {
@@ -99,7 +106,12 @@ export default class Discover extends React.Component {
         {/*<ExpandableFilters movieGenres={genreOptions} />*/}
         <MovieResults>
           {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
-          <MovieList movies={results || []} genres={genreOptions || []} />
+          <MovieList
+            onMovieClick={this.showModal}
+            movies={results || []}
+            genres={genreOptions || []}
+            showMovieDetailsModal={this.state.showMovieDetailsModal}
+          />
           {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
         </MovieResults>
       </DiscoverWrapper>

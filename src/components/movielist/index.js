@@ -4,7 +4,7 @@ import MovieItem from "../movieitem";
 
 export default class MovieList extends React.Component {
   render() {
-    const { movies, genres } = this.props;
+    const { movies, genres, onMovieClick, showMovieDetails } = this.props;
     const matchGenres = (movieGenreIds) => {
       return genres
         .filter((genre) => {
@@ -12,30 +12,33 @@ export default class MovieList extends React.Component {
         })
         .map((genre) => genre.name);
     };
-
+    console.log(movies);
     return (
       <MoviesWrapper>
-        {movies.results && movies.results.map((movie, index) => {
-          const {
-            title,
-            vote_average,
-            overview,
-            release_date,
-            poster_path,
-            genre_ids,
-          } = movie;
-          return (
-            <MovieItem
-              key={index}
-              title={title}
-              rating={vote_average}
-              overview={overview}
-              release={release_date}
-              poster={poster_path}
-              movieGenres={matchGenres(genre_ids)}
-            />
-          );
-        })}
+        {movies.results &&
+          movies.results.map((movie, index) => {
+            const {
+              title,
+              vote_average,
+              overview,
+              release_date,
+              poster_path,
+              genre_ids,
+            } = movie;
+            return (
+              <MovieItem
+                key={index}
+                title={title}
+                rating={vote_average}
+                overview={overview}
+                release={release_date}
+                poster={poster_path}
+                movieGenres={matchGenres(genre_ids)}
+                onMovieClick={onMovieClick}
+                showMovieDetails={this.props.showMovieDetailsModal}
+              />
+            );
+          })}
       </MoviesWrapper>
     );
   }

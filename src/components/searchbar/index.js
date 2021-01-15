@@ -14,17 +14,26 @@ export default class SearchBar extends React.Component {
       searchByYear: "",
     };
   }
+  //
+  // handleOnChange = (event) => {
+  //   this.setState({
+  //     ...this.state,
+  //     [event.target.name]: event.target.value, // me: updating state
+  //   });
+  //   this.props.movieSearch(
+  //     this.state.movieTitleSearch,
+  //     this.state.searchByYear
+  //   ); // wrong, if we pass the updated state to the movieSearch function then it may not be updated straight away so essentially we will be passing nothing!
+  // };
 
-  handleOnChange = (event) => {
-    this.setState({
-      ...this.state,
-      [event.target.name]: event.target.value, // me: updating state
-    });
-    this.props.movieSearch(
-      this.state.movieTitleSearch,
-      this.state.searchByYear
-    ); // me: if someone has searched by year or movie title call th function movieSearch which is a prop! and pass in searches
-  };
+    handleOnChange = (event) => {
+        this.props.movieSearch(event.target.value); // passing the user search straight to the movieSearch function
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.value // me: updating state // this is asyncronous and may not happen straight away so may cause bugs if we use the updated state straight away.
+        });
+    };
+
 
   render() {
     return (
@@ -49,3 +58,5 @@ export default class SearchBar extends React.Component {
     );
   }
 }
+// the state here doesn't update straight away when the user types so i shouldn't pass in the updated state to the movieSearch function as it won't work straight off line 30
+// instead  i need to  pass in what the user types event.target.value. Need to do the same for the year somehow.

@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import * as colors from "../../colors";
 import "../../css/movieItem.scss";
+import Modal from "../modal/modal";
 
 export default class MovieItem extends React.Component {
   render() {
@@ -13,26 +14,56 @@ export default class MovieItem extends React.Component {
       release,
       poster,
       movieGenres,
+      showMovieDetails,
+      onMovieClick,
     } = this.props;
+    console.log(showMovieDetails);
     return (
+
       // The MovieItemWrapper must be linked to the movie details popup
-      <MovieItemWrapper>
-        <LeftCont>
-          <img
-            className="movie-img"
-            src={`https://image.tmdb.org/t/p/w500${poster}`}
-          />
-        </LeftCont>
-        <RightCont>
-          <div className="movie-title-container">
-            <h2 className="movie-title">{title}</h2>
-            <Rating>{rating}</Rating>
-          </div>
-          <div>{movieGenres.join(" ")}</div>
-          <p>{overview}</p>
-          <p>{release}</p>
-        </RightCont>
-      </MovieItemWrapper>
+      <>
+        <MovieItemWrapper onClick={onMovieClick}>
+          <LeftCont>
+            <img
+              className="movie-img"
+              src={`https://image.tmdb.org/t/p/w500${poster}`}
+            />
+          </LeftCont>
+          <RightCont>
+            <div className="movie-title-container">
+              <h2 className="movie-title">{title}</h2>
+              <Rating>{rating}</Rating>
+            </div>
+            <div>{movieGenres.join(" ")}</div>
+            <p>{overview}</p>
+            <p>{release}</p>
+          </RightCont>
+        </MovieItemWrapper>
+
+
+          <Modal
+              show={showMovieDetails}
+          >
+            {/*<MovieItemWrapper onClick={onMovieClick}>*/}
+            {/*  <LeftCont>*/}
+            {/*    <img*/}
+            {/*      className="movie-img"*/}
+            {/*      src={`https://image.tmdb.org/t/p/w500${poster}`}*/}
+            {/*    />*/}
+            {/*  </LeftCont>*/}
+            {/*  <RightCont>*/}
+            {/*    <div className="movie-title-container">*/}
+            {/*      <h2 className="movie-title">{title}</h2>*/}
+            {/*      <Rating>{rating}</Rating>*/}
+            {/*    </div>*/}
+            {/*    <div>{movieGenres.join(" ")}</div>*/}
+            {/*    <p>{overview}</p>*/}
+            {/*    <p>{release}</p>*/}
+            {/*  </RightCont>*/}
+            {/*</MovieItemWrapper>*/}
+          </Modal>
+
+      </>
     );
   }
 }
