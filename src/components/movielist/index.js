@@ -4,7 +4,7 @@ import MovieItem from "../movieitem";
 
 export default class MovieList extends React.Component {
   render() {
-    const { movies, genres, onMovieClick, showMovieDetails } = this.props;
+    const { movies, genres, openModal } = this.props;
     const matchGenres = (movieGenreIds) => {
       return genres
         .filter((genre) => {
@@ -12,34 +12,37 @@ export default class MovieList extends React.Component {
         })
         .map((genre) => genre.name);
     };
-    console.log(movies);
+
+    // console.log(movies); // this is empty on first render of the page [] then once componentDidMount runs it fetches the movies - see console
     return (
-      <MoviesWrapper>
-        {movies.results &&
-          movies.results.map((movie, index) => {
-            const {
-              title,
-              vote_average,
-              overview,
-              release_date,
-              poster_path,
-              genre_ids,
-            } = movie;
-            return (
-              <MovieItem
-                key={index}
-                title={title}
-                rating={vote_average}
-                overview={overview}
-                release={release_date}
-                poster={poster_path}
-                movieGenres={matchGenres(genre_ids)}
-                onMovieClick={onMovieClick}
-                showMovieDetails={this.props.showMovieDetailsModal}
-              />
-            );
-          })}
-      </MoviesWrapper>
+      <>
+        <MoviesWrapper>
+          {movies.results &&
+            movies.results.map((movie, index) => {
+              const {
+                title,
+                vote_average,
+                overview,
+                release_date,
+                poster_path,
+                genre_ids,
+              } = movie;
+              return (
+                <MovieItem
+                  key={index}
+                  title={title}
+                  rating={vote_average}
+                  overview={overview}
+                  release={release_date}
+                  poster={poster_path}
+                  movieGenres={matchGenres(genre_ids)}
+                  onMovieClick={() => openModal(movie)}
+                />
+              );
+
+            })}
+        </MoviesWrapper>
+      </>
     );
   }
 }
@@ -59,3 +62,8 @@ const MoviesWrapper = styled.div`
 {
   /* Finish the MovieItem component and use it here to display the movie results */
 }
+
+// modal: https://codesandbox.io/s/awesome-williamson-v7tug?file=/src/App.js
+//when i click on this movie i want to 1. open a modal
+// the modal must have movie inside
+//

@@ -14,27 +14,22 @@ export default class SearchBar extends React.Component {
       searchByYear: "",
     };
   }
-  //
-  // handleOnChange = (event) => {
-  //   this.setState({
-  //     ...this.state,
-  //     [event.target.name]: event.target.value, // me: updating state
-  //   });
-  //   this.props.movieSearch(
-  //     this.state.movieTitleSearch,
-  //     this.state.searchByYear
-  //   ); // wrong, if we pass the updated state to the movieSearch function then it may not be updated straight away so essentially we will be passing nothing!
-  // };
 
-    handleOnChange = (event) => {
-        this.props.movieSearch(event.target.value); // passing the user search straight to the movieSearch function
-        this.setState({
-            ...this.state,
-            [event.target.name]: event.target.value // me: updating state // this is asyncronous and may not happen straight away so may cause bugs if we use the updated state straight away.
+  handleOnChange = (event) => {
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value, // me: updating state with a dynamic key
+    }, () => {
+        this.props.movieSearch({
+            movieTitleSearch: this.state.movieTitleSearch,
+            searchByYear: this.state.searchByYear
         });
-    };
-
-
+    });
+  };
+    // so the above is now correct. I am spreading the state first of all, then updating the state.
+    // then I want to pass the updated state to the movieSearch function which will be passed up to discover page
+    // if i didn't put this in a callback function then the state wouldn't be updated straight away as state updating is asyncrnous
+    // this would result in me passing an empty string to the function first of all.
   render() {
     return (
       <div>
@@ -58,5 +53,3 @@ export default class SearchBar extends React.Component {
     );
   }
 }
-// the state here doesn't update straight away when the user types so i shouldn't pass in the updated state to the movieSearch function as it won't work straight off line 30
-// instead  i need to  pass in what the user types event.target.value. Need to do the same for the year somehow.

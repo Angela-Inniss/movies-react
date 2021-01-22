@@ -13,6 +13,8 @@ import {
   loadPopularMoviesAndGenres,
   getGenres,
 } from "../../fetcher";
+import Modal from "../../components/modal/modal";
+
 
 export default class Discover extends React.Component {
   constructor(props) {
@@ -26,6 +28,7 @@ export default class Discover extends React.Component {
       totalCount: 0,
       showMovieDetailsModal: false,
       genreOptions: [],
+      selectedMovie: null, // me update after dinndind
       ratingOptions: [
         { id: 7.5, name: 7.5 },
         { id: 8, name: 8 },
@@ -69,16 +72,31 @@ export default class Discover extends React.Component {
 
   // Write a function to get the movie details based on the movie id taken from the URL.// me: something to do with useRoute probably TODO
 
+
   // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
-  async searchMovies(keyword, year) {
-    const response = await getMoviesFiltered(keyword, year);
+  async searchMovies(e) {
+    // console.log(e.movieTitleSearch, e.searchByYear);
+    const response = await getMoviesFiltered(e);
     this.setState({ results: response });
   }
 
-
   showModal = () => {
     console.log("show me");
-    this.setState({ showMovieDetailsModal: !this.state.showMovieDetailsModal});
+    this.setState({ showMovieDetailsModal: !this.state.showMovieDetailsModal });
+  };
+
+  closeModal = () => {
+    console.log("close modal");
+    this.setState((prevState) => ({
+      showMovieDetailsModal: !prevState.showMovieDetailsModal, /// figure out what the difference is between tis and above
+    }));
+  };
+
+   openModal = (movie) => {
+     console.log(movie);
+    this.setState({movieDetails: movie.title}, () => { //  post on stack about this
+      this.showModal();
+    });
 
   };
 
@@ -100,18 +118,23 @@ export default class Discover extends React.Component {
             genres={genreOptions}
             ratings={ratingOptions}
             languages={languageOptions}
-            searchMovies={(keyword, year) => this.searchMovies(keyword, year)}
+            searchMovies={(e) => this.searchMovies(e)}
           />
         </MovieFilters>
         {/*<ExpandableFilters movieGenres={genreOptions} />*/}
         <MovieResults>
           {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
           <MovieList
-            onMovieClick={this.showModal}
+            openModal={(movie) => this.openModal(movie)}
             movies={results || []}
             genres={genreOptions || []}
-            showMovieDetailsModal={this.state.showMovieDetailsModal}
           />
+          <Modal
+            show={this.state.showMovieDetailsModal}
+            handleClose={this.closeModal}
+          >
+            <div>{movieDetails}</div>
+          </Modal>
           {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
         </MovieResults>
       </DiscoverWrapper>
@@ -132,4 +155,3 @@ const MovieResults = styled.div``;
 const MovieFilters = styled.div``;
 
 const MobilePageTitle = styled.header``;
-// me search filters already contains expandable filters so no need to add it on this page too
