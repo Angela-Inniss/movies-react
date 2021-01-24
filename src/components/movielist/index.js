@@ -53,16 +53,10 @@ const MoviesWrapper = styled.div`
   border-radius: 3px;
   transition: all 0.3s ease-in-out;
   border: green 1px solid;
-  margin-top: 10px;
+  // margin-top: 10px;
   margin-bottom: 10px;
 `;
 
-// each movie in movies will be an object i think when come back from api
 {
   /* Finish the MovieItem component and use it here to display the movie results */
 }
-
-// modal: https://codesandbox.io/s/awesome-williamson-v7tug?file=/src/App.js
-//when i click on this movie i want to 1. open a modal
-// the modal must have movie inside
-//

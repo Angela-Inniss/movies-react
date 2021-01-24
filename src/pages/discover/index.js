@@ -119,16 +119,7 @@ export default class Discover extends React.Component {
 
     return (
       <DiscoverWrapper>
-        <MobilePageTitle>Discover</MobilePageTitle>
-        <MovieFilters>
-          <SearchFilters
-            genres={genreOptions}
-            ratings={ratingOptions}
-            languages={languageOptions}
-            searchMovies={(e) => this.searchMovies(e)}
-          />
-        </MovieFilters>
-        {/*<ExpandableFilters movieGenres={genreOptions} />*/}
+        {/*<MobilePageTitle>Discover</MobilePageTitle>*/}
         <MovieResults>
           {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
           <MovieList
@@ -151,6 +142,15 @@ export default class Discover extends React.Component {
           </Modal>
           {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
         </MovieResults>
+        <MovieFilters>
+          <SearchFilters
+            genres={genreOptions}
+            ratings={ratingOptions}
+            languages={languageOptions}
+            searchMovies={(e) => this.searchMovies(e)}
+          />
+        </MovieFilters>
+        {/*<ExpandableFilters movieGenres={genreOptions} />*/}
       </DiscoverWrapper>
     );
   }
@@ -158,14 +158,20 @@ export default class Discover extends React.Component {
 
 const DiscoverWrapper = styled.div`
   padding: 60px 35px;
+  display: flex;
 `;
 
 const TotalCounter = styled.div`
   font-weight: 900;
 `;
 
-const MovieResults = styled.div``;
+const MovieResults = styled.div`
+  flex: 3;
+  margin-right: 30px;
+`;
 
-const MovieFilters = styled.div``;
+const MovieFilters = styled.div`
+  flex: 1;
+`;
 
 const MobilePageTitle = styled.header``;
