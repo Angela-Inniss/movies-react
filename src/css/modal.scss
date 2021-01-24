@@ -10,7 +10,7 @@
 .modal-main {
   position: fixed;
   background: white;
-  width: 80%;
+  //width: 80%;
   height: auto;
   top: 50%;
   left: 50%;
@@ -23,4 +23,25 @@
 
 .display-none {
   display: none;
+}
+
+.btn-watch,
+.btn-close {
+  width: 160px;
+  height: auto;
+  background-color: deeppink;
+  border-radius: 4px;
+  padding: 11px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  color: white;
+  border: 0;
+  //box-shadow: 10px 10px 47px 0px rgba(0, 0, 0, 0.75);
+  margin:10px;
+}
+.box-btns{
+  display:flex;
+  justify-content: flex-end;
+  padding:10px;
 }

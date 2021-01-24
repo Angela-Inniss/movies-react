@@ -14,7 +14,7 @@ import {
   getGenres,
 } from "../../fetcher";
 import Modal from "../../components/modal/modal";
-
+import MovieItem from "../../components/movieitem";
 
 export default class Discover extends React.Component {
   constructor(props) {
@@ -24,7 +24,7 @@ export default class Discover extends React.Component {
       keyword: "",
       year: 0,
       results: [],
-      movieDetails: null,
+      movieDetails: [],
       totalCount: 0,
       showMovieDetailsModal: false,
       genreOptions: [],
@@ -72,7 +72,6 @@ export default class Discover extends React.Component {
 
   // Write a function to get the movie details based on the movie id taken from the URL.// me: something to do with useRoute probably TODO
 
-
   // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
   async searchMovies(e) {
     // console.log(e.movieTitleSearch, e.searchByYear);
@@ -92,12 +91,20 @@ export default class Discover extends React.Component {
     }));
   };
 
-   openModal = (movie) => {
-     console.log(movie);
-    this.setState({movieDetails: movie.title}, () => { //  post on stack about this
+  openModal = (movie) => {
+    console.log(movie); // movie object
+    // change this into an array before i update state?
+    // const turnMovieObjectIntoArray = Object.entries(movie);
+    // console.log(turnMovieObjectIntoArray);
+
+    // const turnMovieToArrayOfObj = Object.entries(movie).map((e) => ({
+    //   [e[0]]: e[1],
+    // }));
+    // console.log(turnMovieToArrayOfObj);
+    this.setState({ movieDetails: movie }, () => {
+      //  post on stack about this
       this.showModal();
     });
-
   };
 
   render() {
@@ -133,7 +140,14 @@ export default class Discover extends React.Component {
             show={this.state.showMovieDetailsModal}
             handleClose={this.closeModal}
           >
-            <div>{movieDetails}</div>
+            <div>
+              <MovieItem
+                title={movieDetails.title}
+                overview={movieDetails.overview}
+                rating={movieDetails.vote_average}
+                poster={movieDetails.poster_path}
+              />
+            </div>
           </Modal>
           {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
         </MovieResults>

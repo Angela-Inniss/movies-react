@@ -31,7 +31,8 @@ export default class MovieItem extends React.Component {
             <h2 className="movie-title">{title}</h2>
             <Rating>{rating}</Rating>
           </div>
-          <div>{movieGenres.join(" ")}</div>
+          {movieGenres && <div>{movieGenres.join(" ")}</div>}
+
           <p>{overview}</p>
           <p>{release}</p>
         </RightCont>

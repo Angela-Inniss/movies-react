@@ -39,7 +39,6 @@ export default class MovieList extends React.Component {
                   onMovieClick={() => openModal(movie)}
                 />
               );
-
             })}
         </MoviesWrapper>
       </>
