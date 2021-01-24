@@ -5,6 +5,8 @@ import * as colors from "../../colors";
 import SearchIcon from "../../images/search-icon-yellow.png";
 import CalendarIcon from "../../images/year-icon.png";
 
+import "../../css/searchBar.scss";
+
 export default class SearchBar extends React.Component {
   // me: added the constructor and state and onchange
   constructor(props) {
@@ -36,22 +38,28 @@ export default class SearchBar extends React.Component {
   render() {
     return (
       <div>
-        <label>search film title</label>
-        <input
-          onChange={this.handleOnChange}
-          type="text"
-          name="movieTitleSearch"
-          placeholder="search by film"
-          value={this.state.movieTitleSearch}
-        />
-        <label>search by year</label>
-        <input
-          onChange={this.handleOnChange}
-          type="text"
-          name="searchByYear"
-          placeholder="search by year"
-          value={this.state.searchByYear}
-        />
+        <div className="input-img-container">
+          <img src={SearchIcon} />
+          <input
+            className="search-input"
+            onChange={this.handleOnChange}
+            type="text"
+            name="movieTitleSearch"
+            placeholder="Search by film"
+            value={this.state.movieTitleSearch}
+          />
+        </div>
+        <div className="input-img-container">
+          <img src={CalendarIcon} />
+          <input
+            className="search-input"
+            onChange={this.handleOnChange}
+            type="text"
+            name="searchByYear"
+            placeholder="Search by year"
+            value={this.state.searchByYear}
+          />
+        </div>
       </div>
     );
   }

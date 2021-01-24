@@ -118,40 +118,44 @@ export default class Discover extends React.Component {
     } = this.state;
 
     return (
-      <DiscoverWrapper>
-        {/*<MobilePageTitle>Discover</MobilePageTitle>*/}
-        <MovieResults>
-          {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
-          <MovieList
-            openModal={(movie) => this.openModal(movie)}
-            movies={results || []}
-            genres={genreOptions || []}
-          />
-          <Modal
-            show={this.state.showMovieDetailsModal}
-            handleClose={this.closeModal}
-          >
-            <div>
-              <MovieItem
-                title={movieDetails.title}
-                overview={movieDetails.overview}
-                rating={movieDetails.vote_average}
-                poster={movieDetails.poster_path}
-              />
-            </div>
-          </Modal>
-          {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
-        </MovieResults>
-        <MovieFilters>
-          <SearchFilters
-            genres={genreOptions}
-            ratings={ratingOptions}
-            languages={languageOptions}
-            searchMovies={(e) => this.searchMovies(e)}
-          />
-        </MovieFilters>
-        {/*<ExpandableFilters movieGenres={genreOptions} />*/}
-      </DiscoverWrapper>
+      <>
+        <MobilePageTitle>Discover</MobilePageTitle>
+        <DiscoverWrapper>
+          <MovieResults>
+            {totalCount > 0 && (
+              <TotalCounter>{totalCount} results</TotalCounter>
+            )}
+            <MovieList
+              openModal={(movie) => this.openModal(movie)}
+              movies={results || []}
+              genres={genreOptions || []}
+            />
+            <Modal
+              show={this.state.showMovieDetailsModal}
+              handleClose={this.closeModal}
+            >
+              <div>
+                <MovieItem
+                  title={movieDetails.title}
+                  overview={movieDetails.overview}
+                  rating={movieDetails.vote_average}
+                  poster={movieDetails.poster_path}
+                />
+              </div>
+            </Modal>
+            {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
+          </MovieResults>
+          <MovieFilters>
+            <SearchFilters
+              genres={genreOptions}
+              ratings={ratingOptions}
+              languages={languageOptions}
+              searchMovies={(e) => this.searchMovies(e)}
+            />
+          </MovieFilters>
+          {/*<ExpandableFilters movieGenres={genreOptions} />*/}
+        </DiscoverWrapper>
+      </>
     );
   }
 }
