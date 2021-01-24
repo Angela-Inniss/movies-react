@@ -47,7 +47,6 @@ export default class Discover extends React.Component {
   }
 
   // Write a function to preload the popular movies when page loads & get the movie genres // me pass the result to genreOptions above // use useeffect?
-
   // loads movies by popularity
   async loadMovies() {
     const movieResults = await loadPopularMoviesAndGenres();
@@ -81,28 +80,29 @@ export default class Discover extends React.Component {
 
   showModal = () => {
     console.log("show me");
-    this.setState({ showMovieDetailsModal: !this.state.showMovieDetailsModal });
+    this.setState(
+      { showMovieDetailsModal: !this.state.showMovieDetailsModal },
+      () => {
+        document.addEventListener("click", this.closeModal);
+      }
+    );
   };
 
   closeModal = () => {
     console.log("close modal");
-    this.setState((prevState) => ({
-      showMovieDetailsModal: !prevState.showMovieDetailsModal, /// figure out what the difference is between tis and above
-    }));
+    this.setState(
+      (prevState) => ({
+        showMovieDetailsModal: !prevState.showMovieDetailsModal, /// figure out what the difference is between tis and above
+      }),
+      () => {
+        document.removeEventListener("click", this.closeModal);
+      }
+    );
   };
 
   openModal = (movie) => {
     console.log(movie); // movie object
-    // change this into an array before i update state?
-    // const turnMovieObjectIntoArray = Object.entries(movie);
-    // console.log(turnMovieObjectIntoArray);
-
-    // const turnMovieToArrayOfObj = Object.entries(movie).map((e) => ({
-    //   [e[0]]: e[1],
-    // }));
-    // console.log(turnMovieToArrayOfObj);
     this.setState({ movieDetails: movie }, () => {
-      //  post on stack about this
       this.showModal();
     });
   };

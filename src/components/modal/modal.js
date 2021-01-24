@@ -12,9 +12,6 @@ const Modal = ({ handleClose, show, children, title }) => {
         {children}
 
         <div className="box-btns">
-          <button className="btn-watch" type="button" onClick={handleClose}>
-            Watch Online
-          </button>
           <button className="btn-close" type="button" onClick={handleClose}>
             Close
           </button>
