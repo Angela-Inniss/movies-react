@@ -19,7 +19,11 @@ export default class SearchFilters extends React.Component {
         <SearchFiltersCont>
           <CategoryTitle bold>Movies</CategoryTitle>
           {/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
-          <ExpandableFilters movieGenres={genres} />
+          <ExpandableFilters
+            movieRatings={ratings}
+            movieGenres={genres}
+            languages={languages}
+          />
         </SearchFiltersCont>
       </FiltersWrapper>
     );
@@ -28,7 +32,6 @@ export default class SearchFilters extends React.Component {
 
 const FiltersWrapper = styled.div`
   position: relative;
-  border: red 1px solid;
 `;
 
 const SearchFiltersCont = styled.div`
@@ -36,7 +39,6 @@ const SearchFiltersCont = styled.div`
   padding: 20px;
   border-radius: 3px;
   transition: all 0.3s ease-in-out;
-  border: green 1px solid;
 
   ${(props) =>
     props.marginBottom &&

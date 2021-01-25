@@ -9,17 +9,35 @@ export default class ExpandableFilters extends React.Component {
     super(props);
 
     this.state = {
-      filtersShown: true,
+      genreFiltersShown: true,
+      ratingFiltersShown: false,
+      showLanguagesFilters: false,
     };
   }
 
   showFilterCategories = () =>
     this.setState({
-      filtersShown: !this.state.filtersShown,
+      genreFiltersShown: !this.state.genreFiltersShown,
     });
 
+  showRatingFilters = () => {
+    this.setState({
+      ratingFiltersShown: !this.state.ratingFiltersShown,
+    });
+  };
+
+  showLanguagesFilters = () => {
+    this.setState({
+      showLanguagesFilters: !this.state.showLanguagesFilters,
+    });
+  };
+
   render() {
-    const { filtersShown } = this.state;
+    const {
+      genreFiltersShown,
+      ratingFiltersShown,
+      showLanguagesFilters,
+    } = this.state;
     return (
       <>
         <button
@@ -27,25 +45,66 @@ export default class ExpandableFilters extends React.Component {
           onClick={this.showFilterCategories}
         >
           <CategoryTitle>
-            {filtersShown ? `--` : `+`} Select genre(s)
+            {genreFiltersShown ? `--` : `+`} Select genre(s)
           </CategoryTitle>
         </button>
         <GenreFilterCont marginTop>
-          {filtersShown && (
+          {genreFiltersShown && (
             <ExpandableFiltersUl>
               {this.props.movieGenres.map((genre, index) => {
                 return (
                   <ExpandableFiltersLi key={index}>
                     <Checkbox />
-                    {genre.name}
+                   <div>{genre.name}</div>
                   </ExpandableFiltersLi>
                 );
               })}
             </ExpandableFiltersUl>
           )}
         </GenreFilterCont>
-        <CategoryTitle> + Select min. vote</CategoryTitle>
-        <CategoryTitle> + Select language</CategoryTitle>
+
+        <button
+          className="category-title-button"
+          onClick={this.showRatingFilters}
+        >
+          <CategoryTitle>
+            {" "}
+            {ratingFiltersShown ? `--` : `+`} Select min. vote{" "}
+          </CategoryTitle>
+        </button>
+        {ratingFiltersShown && (
+          <ExpandableFiltersUl>
+            {this.props.movieRatings.map((rating) => {
+              return (
+                <ExpandableFiltersLi key={rating.id}>
+                  <Checkbox />
+                  {rating.name}
+                </ExpandableFiltersLi>
+              );
+            })}
+          </ExpandableFiltersUl>
+        )}
+
+        <button
+          className="category-title-button"
+          onClick={this.showLanguagesFilters}
+        >
+          <CategoryTitle>
+            {showLanguagesFilters ? `--` : `+`} Select language
+          </CategoryTitle>
+        </button>
+        {showLanguagesFilters && (
+          <ExpandableFiltersUl>
+            {this.props.languages.map((lang) => {
+              return (
+                <ExpandableFiltersLi key={lang.id}>
+                  <Checkbox />
+                  {lang.name}
+                </ExpandableFiltersLi>
+              );
+            })}
+          </ExpandableFiltersUl>
+        )}
       </>
     );
   }
@@ -67,6 +126,7 @@ const GenreFilterCont = styled.div`
 const ExpandableFiltersUl = styled.ul`
   list-style: none;
   padding-left: 0;
+   border: 1px solid green;
 `;
 
 const ExpandableFiltersLi = styled.li`
@@ -74,10 +134,12 @@ const ExpandableFiltersLi = styled.li`
   margin-bottom: 7px;
   font-size: 13px;
   color: gray;
+  border: 1px solid red;
 `;
 
 const CategoryTitle = styled.div`
   margin-bottom: 7px;
+  color: gray;
   ${(props) =>
     props.bold &&
     css`
@@ -85,6 +147,6 @@ const CategoryTitle = styled.div`
     `}
 `;
 
-//// this.props.moviegenres this will be passed down as a prop via the searchFilter file "genres" then via the discover file genreOptions
-// which will be populated when we call teh api to get all the "genres" of film
-//we will map over this prop
+// this.props.moviegenres this will be passed down as a prop via the searchFilter file "genres" then via the discover file genreOptions
+// which will be populated when we call the api to get all the "genres" of film
+// we will map over this prop

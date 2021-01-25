@@ -1,0 +1,11 @@
+.search-input,
+input:focus {
+  border: 0;
+  border-bottom: 2px solid hotpink;
+  margin: 10px;
+  outline: none;
+  background-color: white; }
+
+.input-img-container {
+  display: flex;
+  align-items: center; }

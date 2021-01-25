@@ -7,7 +7,7 @@ export default class CheckBox extends React.Component {
   render() {
     return (
       <CheckboxCont>
-        <input type="checkbox" />
+        <input  type="checkbox" />
       </CheckboxCont>
     );
   }
@@ -15,5 +15,5 @@ export default class CheckBox extends React.Component {
 
 const CheckboxCont = styled.div`
   position: relative;
-  margin-right: 5px;
+ 
 `;

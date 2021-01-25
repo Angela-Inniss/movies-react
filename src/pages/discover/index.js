@@ -119,7 +119,7 @@ export default class Discover extends React.Component {
 
     return (
       <>
-        <MobilePageTitle>Discover</MobilePageTitle>
+        {/*<MobilePageTitle>Discover</MobilePageTitle>*/}
         <DiscoverWrapper>
           <MovieResults>
             {totalCount > 0 && (
